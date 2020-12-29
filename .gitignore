@@ -10,3 +10,11 @@
 /pyvenv.cfg
 /share
 /assets
+*.jpg
+*.jpeg
+.png
+*.png
+*.JPG
+*.JPEG
+*.PNG
+/IMG
