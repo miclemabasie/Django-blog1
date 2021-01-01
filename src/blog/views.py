@@ -44,7 +44,7 @@ def list_post(request, tag_slug=None):
         'page': page,
         'tag': tag,
     }
-    return render(request, 'list.html', context)
+    return render(request, 'blog/blog.html', context)
 
 
 # creating a detail view for each post

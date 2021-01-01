@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{%load static%}
 {% block content%}
 <!-- Start contact Area -->
   <div id="contact" class="contact-area">
@@ -66,8 +66,8 @@
             <div class="form contact-form">
               <div id="sendmessage">Your message has been sent. Thank you!</div>
               <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm">
-                <div class="form-group">
+              <form method="post" class="">
+                {% comment %} <div class="form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                   <div class="validation"></div>
                 </div>
@@ -82,7 +82,10 @@
                 <div class="form-group">
                   <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                   <div class="validation"></div>
-                </div>
+                </div> {% endcomment %}
+
+                {%csrf_token%}
+                {{form.as_p}}
                 <div class="text-center"><button type="submit">Send Message</button></div>
               </form>
             </div>
@@ -92,5 +95,21 @@
       </div>
     </div>
   </div>
-  <!-- End Contact Area -->
+
+
 {%endblock content%}
+  {% if sent %}
+<h1>E-mail successfully sent</h1>
+<p>
+"{{ post.title }}" was successfully sent to {{ form.cleaned_data.to }}.
+
+</p>
+{% else %}
+<h1>Share "{{ post.title }}" by e-mail</h1>
+<form method="post">
+{{ form.as_p }}
+{% csrf_token %}
+<input type="submit" value="Send e-mail">
+</form>
+{% endif %}
+  <!-- End Contact Area -->
